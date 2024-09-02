@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Says Game</title>
+    <link rel="stylesheet" href="/css/game_style.css">
+</head>
+<body>
+    <div><form  method="post"  action="/simon_says">
+        <button class="Back"> Go Back</button>
+    </form></div>
+    <div class="txt"><h1>welcome To Simon Say's Game</h1>
+        <h3>Press any key to start the Game</h3></div>
+    
+    <div class="simon-container">
+        <div class="circle green btn" type="button" id="green"></div>
+        <div class="circle red btn" type="button" id="red"></div>
+        <div class="circle yellow  btn" type="button" id="yellow"></div>
+        <div class="circle blue btn" type="button" id="blue"></div>
+        <div class="center-circle">
+            <p>SIMON</p>
+        </div>
+    </div>
+
+    <div id="game-over" class="game-over hidden">
+        <div class="game-over-content">
+            <h2 class="over">Game Over</h2>
+            <p>Your Score: <span id="final-score "> </span></p>
+            <form  method="post" action="/simon_says/start">
+                <button id="restart-btn" >Restart</button>
+            </form>
+            
+        </div>
+    </div>
+   
+
+    <!-- <form action="">
+        <button></button>
+    </form> -->
+    <script>
+        let logicSeq=[];
+        let playerSeq=[];
+        let gameOverPopup = document.getElementById("game-over");
+        let btns=["yellow","red","purple","green"];
+
+        let h3 = document.querySelector("h3");
+
+        let Started = false;
+        let level = 0;
+
+        function levelUp(){
+            playerSeq=[];
+            level++;
+            h3.innerText= `Level ${level}`;
+            let ranIndx = Math.floor(Math.random()*3);
+            let ranCol = btns[ranIndx];
+            let ranBtn = document.querySelector(`.${ranCol}`);
+
+            logicSeq.push(ranCol);
+
+            btnFlash(ranBtn);
+        }
+
+        document.addEventListener("keypress",function(){
+            if(Started == false){
+                console.log("game is started")
+                Started==true;
+                levelUp();
+            }
+        });
+
+
+        function btnFlash(btn){
+            btn.classList.add("flash");
+            setTimeout(function() {
+                btn.classList.remove("flash");
+            },250);
+
+        }
+
+        function userFlash(btn){
+            btn.classList.add("userflash");
+            setTimeout(function() {
+                btn.classList.remove("userflash");
+            },250);
+
+        }
+
+
+       
+        
+        function checkAns(idx){
+           if(playerSeq[idx] === logicSeq[idx]){
+             if(playerSeq.length == logicSeq.length){
+                setTimeout(levelUp,1000);
+             }
+           } else{
+            h3.innerHTML= `Game Over! Your Score Was <b>${level*5}</b> Press any key to Start`;
+            gameOver();
+            reset();
+           }
+        }
+
+
+        function pressedBtn(){
+            let btn = this;
+            userFlash(btn);
+            userCol= btn.getAttribute("id");
+            playerSeq.push(userCol);
+            checkAns(playerSeq.length-1);
+
+
+        }
+        let allBtns= document.querySelectorAll(".btn");
+        for(btn of allBtns){
+            btn.addEventListener("click",pressedBtn);
+        }
+
+        function reset(){
+            started = false;
+            logicSeq = [];
+            playerSeq = []
+            level = 0;
+        }
+        function gameOver() {
+        // Show the game over popup
+        gameOverPopup.classList.remove("hidden");
+        finalScoreElement.innerText = level;
+    }
+
+
+
+    </script>
+
+</body>
+</html>

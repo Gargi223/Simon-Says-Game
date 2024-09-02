@@ -1,0 +1,140 @@
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+    background-image: url('/backimg.jpg') ;
+    height: 100vh;
+    background-repeat: no-repeat; 
+    background-position: center;
+    
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+}
+
+.txt{
+color: rgb(160, 139, 65);
+text-align: center;
+font-size: 35px;
+}
+
+.simon-container {
+display: flex;
+justify-content: center;
+align-items: center;
+position:relative;
+top:30px;
+left: 460px;
+width: 350px;
+height: 350px;
+}
+
+.circle {
+position: absolute;
+width: 70%;
+height: 70%;
+background-color: gray;
+border: 5px solid black;
+border-radius: 100% 0 0 0;
+transform-origin: 100% 100%;
+}
+
+.green {
+background-color: #1ddc1d;
+transform: rotate(0deg);
+}
+
+.red {
+background-color: #820a0a;
+transform: rotate(90deg);
+}
+
+.yellow {
+background-color: #e2e22c;
+transform: rotate(180deg);
+}
+
+.blue {
+background-color: #0909b5;
+transform: rotate(270deg);
+
+}
+
+.center-circle {
+position: absolute;
+top: 85%;
+left: 85%;
+width: 100px;
+height: 100px;
+background-color: black;
+border-radius: 50%;
+transform: translate(-50%, -50%);
+display: flex;
+justify-content: center;
+align-items: center;
+color: white;
+font-family: Arial, sans-serif;
+font-size: 1.2rem;
+
+}
+.flash{
+background-color: rgb(12, 12, 12);
+}
+.userflash{
+    background-color: rgb(49, 139, 0);
+}
+
+
+/* Game Over popup styling */
+.game-over {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.873);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.game-over-content {
+    background-color:transparent;
+    padding: 70px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #5f5b5c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+button:hover {
+    background-color: #eaf2ec;
+    color: black;
+}
+
+.over{
+    font-size:100px;
+    color: #be1111;
+    
+}
+.Back{
+    margin-top: 10px;
+    background-color: rgb(71, 6, 6);
+}
